@@ -1,0 +1,150 @@
+version: '3.8'
+
+# NETWORKS
+networks:
+  default:
+      driver: bridge
+
+  internal:
+    name: internal
+    driver: bridge
+    external: false
+    # ipam:
+    #   config:
+    #     - subnet: 192.168.90.0/24
+
+# SECRETS
+secrets:
+  plex_claim:
+    file: $DOCKERDIR/secrets/plex_claim
+
+# EXTENSION FIELDS
+## Common environment values
+x-environment: &default-tz-puid-pgid
+  TZ: ${TZ:?}
+  PUID: ${PUID:?}
+  PGID: ${PGID:?}
+
+## Network and security
+x-network-and-security: &network-and-security
+  networks:
+    - default
+  security_opt:
+    - no-new-privileges:true
+
+## Common keys - main
+x-common-keys-core: &common-keys-core
+  <<: *network-and-security
+  restart: unless-stopped
+
+# SERVICES
+services:
+
+  # Plex - Media server
+  plex:
+    image: plexinc/pms-docker:latest
+    container_name: plex
+    <<: *common-keys-core
+    ports:
+      - ${PLEX_PORT:-32400}:32400/tcp
+      - 3005:3005/tcp
+      - 8324:8324/tcp
+      - 32469:32469/tcp
+      - 1900:1900/udp
+      - 32410:32410/udp
+      - 32412:32412/udp
+      - 32413:32413/udp
+      - 32414:32414/udp
+    volumes:
+      - $DOCKERDIR/appdata/plex:/config
+      - $DATADIR/downloads:/data/downloads
+      - $DATADIR/media:/data/media
+      # Optional: store large  data dirs aside to reduce backup size
+      # - $DATADIR/docker/appdata/plex/Library/Application Support/Plex Media Server/Cache:/config/Library/Application Support/Plex Media Server/Cache
+      # - $DATADIR/docker/appdata/plex/Library/Application Support/Plex Media Server/Metadata:/config/Library/Application Support/Plex Media Server/Metadata
+      # - $DATADIR/docker/appdata/plex/Library/Application Support/Plex Media Server/Media:/config/Library/Application Support/Plex Media Server/Media
+    environment:
+      TZ: $TZ
+      PLEX_UID: $PUID
+      PLEX_GID: $PGID
+      HOSTNAME: "Plex"
+      #PLEX_CLAIM_FILE: /run/secrets/plex_claim # https://www.plex.tv/claim/
+    secrets:
+      - plex_claim
+  
+  # qBittorrent - open-source software alternative to µTorrent
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    <<: *common-keys-core
+    ports:
+      - ${QBITTORRENT_PORT:-8080}:8080
+      - 6881:6881
+      - 6881:6881/udp
+    environment:
+      <<: *default-tz-puid-pgid
+      WEBUI_PORT: 8080
+    volumes:
+      - $DOCKERDIR/appdata/qbittorrent/:/config
+      - $DATADIR/downloads/torrents:/downloads
+  
+  # Prowlarr - Indexer management and proxy
+  prowlarr:
+    image: linuxserver/prowlarr:develop
+    container_name: prowlarr
+    <<: *common-keys-core
+    ports:
+      - ${PROWLARR_PORT:-9696}:9696
+    volumes:
+      - $DOCKERDIR/appdata/prowlarr:/config
+    environment:
+      <<: *default-tz-puid-pgid
+      UMASK: 0023
+
+  # Radarr - Movie management
+  radarr:
+    image: linuxserver/radarr:latest
+    container_name: radarr
+    <<: *common-keys-core
+    ports:
+      - ${RADARR_PORT:-7878}:7878
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - $DOCKERDIR/appdata/radarr:/config
+      # Optional: store large  data dirs aside to reduce backup size
+      # - $DATADIR/docker/appdata/radarr/MediaCover:/config/MediaCover
+      # - $DATADIR/downloads:/data/downloads
+      # - $DATADIR/media:/data/media
+    environment:
+      <<: *default-tz-puid-pgid
+
+  # Sonarr - TV shows management
+  # Set url_base in sonarr settings if using PathPrefix
+  sonarr:
+    image: linuxserver/sonarr:latest
+    container_name: sonarr
+    <<: *common-keys-core
+    ports:
+      - ${SONARR_PORT:-8989}:8989
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - $DOCKERDIR/appdata/sonarr:/config
+      - $DATADIR/downloads:/data/downloads
+      - $DATADIR/media:/data/media
+      # Optional: store large  data dirs aside to reduce backup size
+      # - $DATADIR/docker/appdata/sonarr/MediaCover:/config/MediaCover
+    environment:
+      <<: *default-tz-puid-pgid
+
+  # Bazarr - Subtitle management
+  bazarr:
+    image: linuxserver/bazarr:latest
+    container_name: bazarr
+    <<: *common-keys-core
+    ports:
+      - ${BAZARR_PORT:-6767}:6767
+    volumes:
+      - $DOCKERDIR/appdata/bazarr:/config
+      - $DATADIR/media:/data/media
+    environment:
+      <<: *default-tz-puid-pgid
