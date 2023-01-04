@@ -41,6 +41,30 @@ This is an optional step, but recommended.
 ## Environment Setup
 1. Enable Docker system service: `sudo systemctl enable docker`  
   *This allows containers to start on boot*  
+1. Prepare docker directory for compose files and permanent container storage  
+  *Following is my recommendation*  
+  ```
+  .
+  ├── srv                       
+  │   ├── docker                      # Docker root
+  │   │   ├── appdata                 # Container local directory mounts
+  │   │   │   ├── container_name      # Dirs must be created before starting given container
+  │   │   │   ├── container_name-db
+  │   │   │   └── ...
+  │   │   ├── env                     # If you want to use multiple .env files
+  │   │   ├── secrets                 # Docker secrets
+  │   │   ├── shared                  # Shared certificates
+  │   │   └── docker-compose.yml      # Compose config (if using compose)
+  |   └── ...
+  └── ...
+  ```
+  ```bash
+  cd /srv
+  sudo mkdir docker
+  chown ${USER} docker  
+  cd docker
+  mkdir appdata env secrets shared
+  ```
 
 ## Launch
 
