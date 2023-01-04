@@ -15,6 +15,7 @@ Basic Docker media server template with setup instructions.
 1. Add user to the Docker group: `sudo usermod -aG docker [user]`  
    Or `sudo usermod -aG docker ${USER}` to add current user
    *You can check it by running `groups ${USER}`.*
+   *Alternatively, use `sudo` for every `docker` command.*
 1. Restart to apply changes: `sudo restart`
 1. SSH to the RPi again
 1. Run a test container: `docker run hello-world`  
@@ -81,7 +82,8 @@ I would recomend something like this:
    *You need to add `DATADIR`, `DOCKERDIR`, `TZ`, `PUID` & `PGID`.*  
    *Use `id` to get the user and docker group IDs.*
    *`cat` will read the contents of the file.*
-1. Run `docker-compose up -d`
+1. Spin up compose file: `docker-compose up -d`
+1. Check status: `docker-compose ps`
 
 ## Troubleshooting
 ### `Failed to build bcrypt cryptography`
@@ -105,10 +107,13 @@ You can find more info about this issue here: [github.com/adriankumpf](https://g
 `Cannot connect to the Docker daemon at unix:/var/run/docker.sock. Is the docker daemon running?`  
 Try `sudo` your command. If that doesn't help, try `sudo service docker restart`.  
 
+### 'Pending kernel upgrade`
+Run `sudo apt remove needrestart` - it was installed by docker setup script and is not required.
+Alternatively, just ignore the message.
+
 ## Links
 ### Sources
 [pimylifeup.com](https://pimylifeup.com/raspberry-pi-docker/)  
 [dev.to/elalemanyo](https://dev.to/elalemanyo/how-to-install-docker-and-docker-compose-on-raspberry-pi-1mo)  
-
-### Useful
-[Static IP - pimylifeup.com](https://pimylifeup.com/raspberry-pi-static-ip-address/)  
+[github.com/adriankumpf](https://github.com/adriankumpf/teslamate/discussions/2881)  
+[raspberrypi.stackexchange.com](https://raspberrypi.stackexchange.com/questions/111198/pending-kernel-upgrade-even-after-reboot-my-rpi4)  
