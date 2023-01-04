@@ -111,10 +111,10 @@ services:
     volumes:
       - "/etc/localtime:/etc/localtime:ro"
       - $DOCKERDIR/appdata/radarr:/config
+      - $DATADIR/downloads:/data/downloads
+      - $DATADIR/media:/data/media
       # Optional: store large  data dirs aside to reduce backup size
       # - $DATADIR/docker/appdata/radarr/MediaCover:/config/MediaCover
-      # - $DATADIR/downloads:/data/downloads
-      # - $DATADIR/media:/data/media
     environment:
       <<: *default-tz-puid-pgid
 
