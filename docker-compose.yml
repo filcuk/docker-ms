@@ -40,6 +40,23 @@ x-common-keys-core: &common-keys-core
 # SERVICES
 services:
 
+  # Yacht - Container management UI
+  # Default login: admin@yacht.local:pass
+  # Mem graphs not working on ARM: https://yacht.sh/docs/Installation/ARM/
+  yacht:
+    image: selfhostedpro/yacht:latest
+    container_name: yacht
+    <<: *common-keys-core
+    ports:
+      - ${YACHT_PORT:-8000}:8000
+    volumes:
+      - $DOCKERDIR/appdata/yacht:/config
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      <<: *default-tz-puid-pgid
+      DISABLE_AUTH: true      # Do not use if service is exposed!
+      COMPOSE_DIR: $DOCKERDIR
+
   # Plex - Media server
   plex:
     image: lscr.io/linuxserver/plex:arm32v7-latest 
