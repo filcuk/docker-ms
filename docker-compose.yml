@@ -89,8 +89,9 @@ services:
       - $DATADIR/media/video/tv shows:/data/tvshows
       - /opt/vc/lib:/opt/vc/lib     # RPi OpenMAX HW acceleration
     devices:
-      - /dev/vcsm:/dev/vcsm         # RPi OpenMAX HW acceleration
       - /dev/vchiq:/dev/vchiq       # RPi OpenMAX HW acceleration
+      - /dev/vcsm:/dev/vcsm         # RPi OpenMAX HW acceleration
+      # - /dev/vcsm-cma:/dev/vcsm-cma # Alternative to the above
       # - /dev/video10:/dev/video10   # RPi V4L2 HW acceleration
       # - /dev/video11:/dev/video11   # RPi V4L2 HW acceleration
       # - /dev/video12:/dev/video12   # RPi V4L2 HW acceleration
