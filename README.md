@@ -52,7 +52,7 @@ This is an optional step, but recommended.
 
 [^1]: See [this](#docker-compose-manual-setup) troubleshooting step. 
 
-### Directory Setup
+### Directory System
 I would recommend something like this:  
 *Note that `data` is within the `docker` folder in this repo for simplicity.*  
 *Placing it outside of the `docker` folder as shown below would be strongly recommended.*
@@ -77,6 +77,7 @@ I would recommend something like this:
 └── ...
 ```
 
+#### Directory Setup
 1. Setup Docker root
    ```bash
    cd /srv
@@ -89,6 +90,7 @@ I would recommend something like this:
       ```bash
       git clone --depth=1 --branch main https://github.com/filcuk/rpi-docker-starter.git .
       ```
+      *The `.` at the end makes current folder the repo root folder, instead of creating a sub-directory.*  
    2. Or set it up manually:  
       ```bash
       mkdir data appdata
