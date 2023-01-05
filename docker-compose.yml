@@ -67,7 +67,7 @@ services:
       TZ: $TZ
       PLEX_UID: $PUID
       PLEX_GID: $PGID
-      HOSTNAME: "Plex"
+      VERSION: docker
       #PLEX_CLAIM_FILE: /run/secrets/plex_claim # https://www.plex.tv/claim/
     secrets:
       - plex_claim
