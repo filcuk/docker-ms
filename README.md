@@ -132,13 +132,13 @@ You can find more info about this issue here: [github.com/adriankumpf](https://g
 Try `sudo` your command. If that doesn't help, try `sudo service docker restart`.  
 
 ### 'Pending kernel upgrade`
-Run `sudo apt remove needrestart` - it was installed by docker setup script and is not required.
-Alternatively, just ignore the message.
+Run `sudo apt remove needrestart` - it was installed by docker setup script and is not required.  
+Alternatively, just ignore the message.  
 
 ## Links
 ### Sources
 [pimylifeup.com](https://pimylifeup.com/raspberry-pi-docker/)  
 [dev.to/elalemanyo](https://dev.to/elalemanyo/how-to-install-docker-and-docker-compose-on-raspberry-pi-1mo)  
 [github.com/adriankumpf](https://github.com/adriankumpf/teslamate/discussions/2881)  
-[github.com/kclyu](https://github.com/kclyu/rpi-webrtc-streamer/issues/122)
+[github.com/kclyu](https://github.com/kclyu/rpi-webrtc-streamer/issues/122)  
 [raspberrypi.stackexchange.com](https://raspberrypi.stackexchange.com/questions/111198/pending-kernel-upgrade-even-after-reboot-my-rpi4)  
