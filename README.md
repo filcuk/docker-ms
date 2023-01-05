@@ -2,7 +2,7 @@
 Basic Docker media server template with setup instructions.
 
 ## Notes
-- Be aware that you may need to use `docker compose` instead of `docker-compose`, based on your version
+- Be aware that you may need to use `docker compose` command instead of `docker-compose`, based on your version
 
 ## Steps
 ### RPi Setup
@@ -46,7 +46,7 @@ This is an optional step, but recommended.
 ### Directory Setup
 I would recommend something like this:  
 *Note that `data` is within the `docker` folder in this repo for simplicity.*  
-*Placing it outside of the `docker` folder would make backups easier.*
+*Placing it outside of the `docker` folder as shown below would be strongly recommended.*
 ```
 .
 ├── srv                             # Or /home/username/
