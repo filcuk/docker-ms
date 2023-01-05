@@ -10,6 +10,7 @@ Basic RPi Docker media server template with setup instructions.
 *Does not include instructions for setting up individual services, once running.*  
 
 ## Notes
+- Please submit an [issue](https://github.com/filcuk/rpi-docker-starter/issues/new) if you find any errors
 - Be aware that you may need to use `docker compose` command instead of `docker-compose`, based on your version
 
 ## Steps
