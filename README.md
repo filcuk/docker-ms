@@ -97,16 +97,16 @@ I would recommend something like this:
       ```
 
 ### Launch
-1. Edit environment vars: `nano .env`
+1. Edit environment vars: `nano .env`  
    *You need to set `DATADIR`, `DOCKERDIR`, `TZ`, `PUID` & `PGID`.*  
-   *Use `id` to get the user and docker group IDs.*
-   *`cat` will read the contents of the file.*
-1. Spin up containers: `docker-compose up -d`
-1. Check status: `docker-compose ps`
-1. Access your services on: `192.168.1.x:[webui-port]`
+   *Use `id` to get the user and docker group IDs.*  
+   *`cat` will read the contents of the file.*  
+1. Spin up containers: `docker-compose up -d`  
+1. Check status: `docker-compose ps`  
+1. Access your services on: `192.168.1.x:[webui-port]`  
    *Note that in docker-compose, the first port is the one facing outwards.*  
    *I.e. for `- 8800:8080`, you would enter `192.168.1.x:8800`.*  
-   *`yacht` (included) lists services with their open ports as links for ease of access.*
+   *`yacht` (included) lists services with their open ports as links for ease of access.*  
 
 ### Post-launch
 #### Maintenance
@@ -114,33 +114,33 @@ You can use `docker system prune` to clear unused objects and reclaim storage.
 See [docs.docker.com/compose](https://docs.docker.com/compose/reference/) for other commands.  
 
 #### Re-downloading repo
-1. Discard any changes: `git restore .`
-   *You can discard changes for single file: `git restore path/to/file`.*
-1. Pull latest: `git pull`
+1. Discard any changes: `git restore .`  
+   *You can discard changes for single file: `git restore path/to/file`.*  
+1. Pull latest: `git pull`  
 
 ## Troubleshooting
 ### `Failed to build bcrypt cryptography`
-1. Install deb package: `sudo apt install docker-compose`
-   *Note that you may not have the latest version this way.*
-2. Downgrade `bcrypt`: `sudo pip3 install -U "bcrypt<4.0.0"`
-   *Pre-v4 `bcrypt` should not have this issue.*
-3. See [below](#docker-compose-manual-setup)
+1. Install deb package: `sudo apt install docker-compose`  
+   *Note that you may not have the latest version this way.*  
+2. Downgrade `bcrypt`: `sudo pip3 install -U "bcrypt<4.0.0"`  
+   *Pre-v4 `bcrypt` should not have this issue.*  
+3. See [below](#docker-compose-manual-setup)  
   
 You can find more info about this issue here: [github.com/adriankumpf](https://github.com/adriankumpf/teslamate/discussions/2881)  
 
 ### `docker-compose` manual setup
-1. Remove current binary (if present): `sudo apt remove docker-compose` or `sudo rm /usr/local/bin/docker-compose`
-1.  Find the latest release: [github.com/docker](https://github.com/docker/compose/releases)
-1.  Download the binary: `sudo curl -L "https://github.com/docker/compose/releases/download/v2.14.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose`
-1.  Allow execution: `sudo chmod +x /usr/local/bin/docker-compose`
-1.  Remove old link: `sudo rm /usr/bin/docker-compose`
-1.  Make new link: `sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose`
+1. Remove current binary (if present): `sudo apt remove docker-compose` or `sudo rm /usr/local/bin/docker-compose`  
+1.  Find the latest release: [github.com/docker](https://github.com/docker/compose/releases)  
+1.  Download the binary: `sudo curl -L "https://github.com/docker/compose/releases/download/v2.14.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose`  
+1.  Allow execution: `sudo chmod +x /usr/local/bin/docker-compose`  
+1.  Remove old link: `sudo rm /usr/bin/docker-compose`  
+1.  Make new link: `sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose`  
 
 ### `Cannot connect to the Docker daemon...`
 `Cannot connect to the Docker daemon at unix:/var/run/docker.sock. Is the docker daemon running?`  
 Try `sudo` your command. If that doesn't help, try `sudo service docker restart`.  
 
-### 'Pending kernel upgrade`
+### `Pending kernel upgrade` notification
 Run `sudo apt remove needrestart` - it was installed by docker setup script and is not required.  
 Alternatively, just ignore the message.  
 
