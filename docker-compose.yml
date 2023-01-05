@@ -42,7 +42,7 @@ services:
 
   # Plex - Media server
   plex:
-    image: plexinc/pms-docker:latest
+    image: lscr.io/linuxserver/plex:arm32v7-latest 
     container_name: plex
     <<: *common-keys-core
     ports:
@@ -74,7 +74,7 @@ services:
   
   # qBittorrent - open-source software alternative to µTorrent
   qbittorrent:
-    image: lscr.io/linuxserver/qbittorrent:latest
+    image: lscr.io/linuxserver/qbittorrent:arm32v7-latest
     container_name: qbittorrent
     <<: *common-keys-core
     ports:
@@ -90,7 +90,7 @@ services:
   
   # Prowlarr - Indexer management and proxy
   prowlarr:
-    image: linuxserver/prowlarr:develop
+    image: lscr.io/linuxserver/prowlarr:arm32v7-develop
     container_name: prowlarr
     <<: *common-keys-core
     ports:
@@ -103,7 +103,7 @@ services:
 
   # Radarr - Movie management
   radarr:
-    image: linuxserver/radarr:latest
+    image: lscr.io/linuxserver/radarr:arm32v7-latest
     container_name: radarr
     <<: *common-keys-core
     ports:
@@ -121,7 +121,7 @@ services:
   # Sonarr - TV shows management
   # Set url_base in sonarr settings if using PathPrefix
   sonarr:
-    image: linuxserver/sonarr:latest
+    image: lscr.io/linuxserver/sonarr:arm32v7-latest
     container_name: sonarr
     <<: *common-keys-core
     ports:
@@ -138,7 +138,7 @@ services:
 
   # Bazarr - Subtitle management
   bazarr:
-    image: linuxserver/bazarr:latest
+    image: lscr.io/linuxserver/bazarr:arm32v7-latest
     container_name: bazarr
     <<: *common-keys-core
     ports:
