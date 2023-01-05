@@ -58,7 +58,7 @@ services:
     volumes:
       - $DOCKERDIR/appdata/plex:/config
       - $DATADIR/downloads:/data/downloads
-      - $DATADIR/media:/data/media
+      - $DATADIR/media/video:/data/media
       # Optional: store large  data dirs aside to reduce backup size
       # - $DATADIR/docker/appdata/plex/Library/Application Support/Plex Media Server/Cache:/config/Library/Application Support/Plex Media Server/Cache
       # - $DATADIR/docker/appdata/plex/Library/Application Support/Plex Media Server/Metadata:/config/Library/Application Support/Plex Media Server/Metadata
@@ -112,7 +112,7 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
       - $DOCKERDIR/appdata/radarr:/config
       - $DATADIR/downloads:/data/downloads
-      - $DATADIR/media:/data/media
+      - $DATADIR/media/video:/data/media
       # Optional: store large  data dirs aside to reduce backup size
       # - $DATADIR/docker/appdata/radarr/MediaCover:/config/MediaCover
     environment:
@@ -130,7 +130,7 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
       - $DOCKERDIR/appdata/sonarr:/config
       - $DATADIR/downloads:/data/downloads
-      - $DATADIR/media:/data/media
+      - $DATADIR/media/video:/data/media
       # Optional: store large  data dirs aside to reduce backup size
       # - $DATADIR/docker/appdata/sonarr/MediaCover:/config/MediaCover
     environment:
@@ -145,6 +145,6 @@ services:
       - ${BAZARR_PORT:-6767}:6767
     volumes:
       - $DOCKERDIR/appdata/bazarr:/config
-      - $DATADIR/media:/data/media
+      - $DATADIR/media/video:/data/media
     environment:
       <<: *default-tz-puid-pgid
