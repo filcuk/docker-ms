@@ -97,10 +97,12 @@ I would recommend something like this:
 1. Access your services on: `192.168.1.x:[webui-port]`
    *Note that in docker-compose, the first port is the one facing outwards.*  
    *I.e. for `- 8800:8080`, you would enter `192.168.1.x:8800`.*  
+   *`yacht` (included) lists services with their open ports as links for ease of access.*
 
 ### Post-launch
-#### Compose
-See [docs.docker.com/compose](https://docs.docker.com/compose/reference/) for other commands.
+#### Maintenance
+You can use `docker system prune` to clear unused objects and reclaim storage.  
+See [docs.docker.com/compose](https://docs.docker.com/compose/reference/) for other commands.  
 
 #### Re-downloading repo
 1. Discard any changes: `git restore .`
