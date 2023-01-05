@@ -110,8 +110,9 @@ I would recommend something like this:
 
 ### Post-launch
 #### Maintenance
-You can use `docker system prune` to clear unused objects and reclaim storage.  
-See [docs.docker.com/compose](https://docs.docker.com/compose/reference/) for other commands.  
+- I would recommend setting up your own repo from the `docker` directory and submit changes to it regularly  
+- You can use `docker system prune` to clear unused objects and reclaim storage  
+  *See [docs.docker.com/compose](https://docs.docker.com/compose/reference/) for more.*  
 
 #### Re-downloading repo
 1. Discard any changes: `git restore .`  
