@@ -41,7 +41,9 @@ This is an optional step, but recommended.
 [^1]: See [this](#docker-compose-manual-setup) troubleshooting step. 
 
 ### Directory Setup
-I would recomend something like this:
+I would recommend something like this:  
+*Note that `data` is within the `docker` folder in this repo for simplicity.*  
+*Placing it outside of the `docker` folder would make backups easier.*
 ```
 .
 ├── srv                             # Or /home/username/
@@ -50,11 +52,15 @@ I would recomend something like this:
 │   │   │   ├── container_name      # Examples
 │   │   │   ├── container_name-db
 │   │   │   └── ...
-│   │   ├── env                     # If you want to use multiple .env files
+│   │   ├── env
 │   │   ├── secrets                 # Docker secrets
 │   │   ├── shared                  # Shared certificates
-│   │   ├── .env                    # Main .env file
-│   │   └── docker-compose.yml      # Compose config (if using compose)
+│   │   ├── .env
+│   │   └── docker-compose.yml
+│   ├── data                        # Media root
+│   │   ├── movies
+│   │   ├── tv shows
+│   │   └── ...
 |   └── ...
 └── ...
 ```
@@ -66,24 +72,31 @@ I would recomend something like this:
    chown ${USER} docker  
    cd docker
    ```
-1. Then either
+2. Then either
    1. Clone this repo:  
       ```bash
       git clone --depth=1 --branch main https://github.com/filcuk/rpi-docker-starter.git .
       ```
-   1. Or set it up manually:  
+   2. Or set it up manually:  
       ```bash
-      mkdir appdata env secrets shared
+      mkdir data appdata
+      wget 'https://raw.githubusercontent.com/filcuk/rpi-docker-starter/main/.env' -O .env
       wget 'https://raw.githubusercontent.com/filcuk/rpi-docker-starter/main/docker-compose.yml' -O docker-compose.yml
       ```
 
 ### Launch
 1. Edit environment vars: `nano .env`
-   *You need to add `DATADIR`, `DOCKERDIR`, `TZ`, `PUID` & `PGID`.*  
+   *You need to set `DATADIR`, `DOCKERDIR`, `TZ`, `PUID` & `PGID`.*  
    *Use `id` to get the user and docker group IDs.*
    *`cat` will read the contents of the file.*
 1. Spin up compose file: `docker-compose up -d`
 1. Check status: `docker-compose ps`
+
+### Post-launch
+#### Re-downloading repo
+1. Discard any changes: `git restore .`
+   *You can discard changes for single file: `git restore path/to/file`.*
+1. Pull latest: `git pull`
 
 ## Troubleshooting
 ### `Failed to build bcrypt cryptography`
