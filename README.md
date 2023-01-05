@@ -22,16 +22,16 @@ Basic RPi Docker media server template with setup instructions.
 
 ### Docker Setup
 1. Update RPi: `sudo apt update && sudo apt upgrade`
-1. Run Docker setup: `curl -sSL https://get.docker.com | sh`  
-   *Typically not recommended, but Docker is a trusted source.*
+1. Run Docker setup: `curl -sSL https://get.docker.com | sh`   
+   *Typically not recommended, but Docker is a trusted source.*  
 1. Add user to the Docker group: `sudo usermod -aG docker [user]`  
-   Or `sudo usermod -aG docker ${USER}` to add current user
-   *You can check it by running `groups ${USER}`.*
-   *Alternatively, use `sudo` for every `docker` command.*
+   Or `sudo usermod -aG docker ${USER}` to add current user  
+   *You can check it by running `groups ${USER}`.*  
+   *Alternatively, use `sudo` for every `docker` command.*  
 1. Restart to apply changes: `sudo restart`
 1. SSH to the RPi again
 1. Run a test container: `docker run hello-world`  
-   *It should tell you whether your setup is running correctly.*
+   *It should tell you whether your setup is running correctly.*  
 1. Optionally enable Docker system service: `sudo systemctl enable docker`  
    *This allows containers to start on boot.*  
 
