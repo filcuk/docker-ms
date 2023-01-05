@@ -1,5 +1,13 @@
 # RPi Docker Starter
-Basic Docker media server template with setup instructions.
+
+<table><tr>
+<td><img src="https://user-images.githubusercontent.com/1339532/210766641-23f66884-038c-4e8d-afa7-c3274414d093.svg" width="128"></td>
+<td><img src="https://user-images.githubusercontent.com/1339532/210766661-0dc7a907-a1e9-4b31-b41d-e1628a3062da.svg" width="128"></td>
+<td><img src="https://user-images.githubusercontent.com/1339532/210766650-55b7c756-776f-4e93-a3c6-3f0d68958f4d.svg" width="128"></td>
+</tr></table>
+
+Basic RPi Docker media server template with setup instructions.  
+*Does not include instructions for setting up individual services, once running.*  
 
 ## Notes
 - Be aware that you may need to use `docker compose` command instead of `docker-compose`, based on your version
