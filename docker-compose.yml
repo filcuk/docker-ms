@@ -72,6 +72,32 @@ services:
     secrets:
       - plex_claim
   
+  # Jellyfin - Free media server alternative to Emby & Plex
+  # Note: you may want to allocate extra memory for the GPU using OpenMAX
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:arm32v7-latest
+    container_name: jellyfin
+    <<: *common-keys-core
+    ports:
+      - ${JELLYFIN_PORT:-8096}:8096 # HTTP Web UI
+      - 8920:8920                   # Optional, HTTPS Web UI
+      - 7359:7359/udp               # Optional, local network discovery
+      - 1900:1900/udp               # Optional, DNLA service discovery
+    volumes:
+      - $DOCKERDIR/appdata/jellyfin:/config
+      - $DATADIR/media/video/movies:/data/movies
+      - $DATADIR/media/video/tv shows:/data/tvshows
+      - /opt/vc/lib:/opt/vc/lib     # RPi OpenMAX HW acceleration
+    devices:
+      - /dev/vcsm:/dev/vcsm         # RPi OpenMAX HW acceleration
+      - /dev/vchiq:/dev/vchiq       # RPi OpenMAX HW acceleration
+      # - /dev/video10:/dev/video10   # RPi V4L2 HW acceleration
+      # - /dev/video11:/dev/video11   # RPi V4L2 HW acceleration
+      # - /dev/video12:/dev/video12   # RPi V4L2 HW acceleration
+    environment:
+      <<: *default-tz-puid-pgid
+      # - JELLYFIN_PublishedServerUrl=192.168.0.5 # Optional
+
   # qBittorrent - open-source software alternative to µTorrent
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:arm32v7-latest
