@@ -1,6 +1,9 @@
 # RPi Docker Starter
 Basic Docker media server template with setup instructions.
 
+## Notes
+- Be aware that you may need to use `docker compose` instead of `docker-compose`, based on your version
+
 ## Steps
 ### RPi Setup
 1. Install OS onto a microSD using [Raspberry Pi Imager](https://www.raspberrypi.com/software/)  
@@ -89,10 +92,16 @@ I would recommend something like this:
    *You need to set `DATADIR`, `DOCKERDIR`, `TZ`, `PUID` & `PGID`.*  
    *Use `id` to get the user and docker group IDs.*
    *`cat` will read the contents of the file.*
-1. Spin up compose file: `docker-compose up -d`
+1. Spin up containers: `docker-compose up -d`
 1. Check status: `docker-compose ps`
+1. Access your services on: `192.168.1.x:[webui-port]`
+   *Note that in docker-compose, the first port is the one facing outwards.*  
+   *I.e. for `- 8800:8080`, you would enter `192.168.1.x:8800`.*  
 
 ### Post-launch
+#### Compose
+See [docs.docker.com/compose](https://docs.docker.com/compose/reference/) for other commands.
+
 #### Re-downloading repo
 1. Discard any changes: `git restore .`
    *You can discard changes for single file: `git restore path/to/file`.*
@@ -129,4 +138,5 @@ Alternatively, just ignore the message.
 [pimylifeup.com](https://pimylifeup.com/raspberry-pi-docker/)  
 [dev.to/elalemanyo](https://dev.to/elalemanyo/how-to-install-docker-and-docker-compose-on-raspberry-pi-1mo)  
 [github.com/adriankumpf](https://github.com/adriankumpf/teslamate/discussions/2881)  
+[github.com/kclyu](https://github.com/kclyu/rpi-webrtc-streamer/issues/122)
 [raspberrypi.stackexchange.com](https://raspberrypi.stackexchange.com/questions/111198/pending-kernel-upgrade-even-after-reboot-my-rpi4)  
