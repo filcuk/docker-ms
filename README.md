@@ -111,7 +111,7 @@ I would recommend something like this:
    *`yacht` (included) lists services with their open ports as links for ease of access.*  
 
 ### Post-launch
-#### Maintenance
+- See [TRaSH Guides](https://trash-guides.info/) on help with setting up Sonarr & Radarr
 - I would recommend setting up your own repo from the `docker` directory and submit changes to it regularly  
 - You can use `docker system prune` to clear unused objects and reclaim storage  
   *See [docs.docker.com/compose](https://docs.docker.com/compose/reference/) for more.*  
